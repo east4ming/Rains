@@ -59,3 +59,31 @@
 
 ## 动态雨幕
 
+### 阵雨
+
+效果: 下过一批雨就没了.
+
+#### `settings.py`
+
+添加雨滴坠落速度
+
+#### `rain_drop.py`
+
+添加`update()`方法: 如果雨滴的rect的top还小于屏幕height, 就根据速度更新雨滴的y坐标.
+
+#### `game_functions.py`
+
+添加`update_rains()`函数:
+
+1. 遍历rains Group中的所有雨滴对象
+2. 如果雨滴已经在屏幕外, 从Group中移除
+3. 调用雨滴对象的`update()`方法, 更新每个雨滴对象的位置.
+
+#### `raining.py`
+
+在绘制rains之前, 调用`game_functions.py`中的`update_rains()`, 更新雨滴位置.
+
+### 连绵细雨
+
+如果雨滴 Gruop长度不够, 就重绘一行.
+
