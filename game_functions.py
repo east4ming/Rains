@@ -19,14 +19,21 @@ def cal_available_lines(rains_sets, rain_drop_height):
 def gen_rains(rains_sets, screen, rains):
     """生成一行/多行雨滴"""
     # 初始化一个示例雨滴(用于算width/height)
-    ex_rain_drop = RainDrop(screen)
+    ex_rain_drop = RainDrop(rains_sets, screen)
     rain_drop_width = ex_rain_drop.rect.width
     rain_drop_height = ex_rain_drop.rect.height
     available_rows = cal_available_rows(rains_sets, rain_drop_width)
     available_lines = cal_available_lines(rains_sets, rain_drop_height)
     for line in range(available_lines):
         for row in range(available_rows):
-            rain_drop = RainDrop(screen)
+            rain_drop = RainDrop(rains_sets, screen)
             rain_drop.rect.x = row * rain_drop_width
             rain_drop.rect.y = line * rain_drop_height
             rains.add(rain_drop)
+
+
+def update_rains(rains, rains_sets):
+    for rain_drop in rains.sprites():
+        rain_drop.update()
+        if rain_drop.rect.top >= rains_sets.scr_height:
+            rains.remove(rain_drop)

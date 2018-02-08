@@ -23,6 +23,7 @@ def main():
                 sys.exit()
         screen.fill(rains_sets.scr_bgcolor)
         # rain_drop.blitme()
+        gf.update_rains(rains, rains_sets)
         rains.draw(screen)
         pygame.display.flip()
 
